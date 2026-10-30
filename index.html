@@ -144,12 +144,99 @@
   .guru-name { font-size: 14.5px; font-weight: 700; margin-bottom: 4px; color: var(--text-primary); display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .guru-sub { font-size: 12px; color: var(--text-secondary); display: block; }
 
+  /* =========================================
+     CREATOR PROFILE CARD (BARU)
+     ========================================= */
+  .creator-card {
+    background: linear-gradient(180deg, var(--bg-surface-elevated) 0%, var(--bg-surface) 100%);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 32px 24px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .creator-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 100px;
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.15) 0%, transparent 100%);
+    z-index: 0;
+  }
+  .creator-avatar-wrap {
+    position: relative;
+    width: 110px; height: 110px;
+    margin: 0 auto 16px;
+    z-index: 1;
+  }
+  .creator-avatar {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--bg-surface);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    background: var(--bg-base);
+    position: relative; z-index: 1;
+  }
+  .creator-initial {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    border: 4px solid var(--bg-surface);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; font-weight: 800; color: #022C22;
+    position: relative; z-index: 1;
+  }
+  .creator-badge {
+    position: absolute;
+    bottom: 5px; right: 5px;
+    background: var(--brand-primary);
+    color: #022C22;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 3px solid var(--bg-surface);
+    z-index: 2;
+  }
+  .creator-badge svg { width: 14px; height: 14px; stroke-width: 3; }
+  
+  .creator-name {
+    font-size: 22px; font-weight: 800;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    position: relative; z-index: 1;
+  }
+  .creator-role {
+    font-size: 13px; font-weight: 600;
+    color: var(--brand-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    position: relative; z-index: 1;
+  }
+  .creator-info-list {
+    display: flex; flex-direction: column; gap: 10px;
+    text-align: left;
+    background: rgba(0,0,0,0.2);
+    padding: 16px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-subtle);
+    position: relative; z-index: 1;
+  }
+  .creator-info-item {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 13.5px; color: var(--text-primary);
+  }
+  .creator-info-item svg { color: var(--text-secondary); flex-shrink: 0; }
+
+  /* Empty State */
   .empty-state { grid-column: 1/-1; text-align: center; padding: 48px 24px; background: var(--bg-surface); border: 1px dashed var(--border-strong); border-radius: var(--radius-lg); }
   .empty-state p { color: var(--text-secondary); font-size: 14px; margin-top: 8px; }
 
   /* Bottom Nav */
   nav.bottom { position: fixed; bottom: 0; left: 0; right: 0; height: calc(var(--nav-h) + var(--safe-b)); padding-bottom: var(--safe-b); background: var(--glass-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--glass-border); display: flex; align-items: center; justify-content: space-around; z-index: 50; }
-  nav.bottom button { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--text-secondary); font-size: 11px; font-weight: 600; padding: 8px 12px; cursor: pointer; transition: color 0.2s; }
+  nav.bottom button { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-secondary); font-size: 10.5px; font-weight: 600; padding: 8px 4px; cursor: pointer; transition: color 0.2s; flex: 1; }
   nav.bottom button svg { width: 22px; height: 22px; transition: transform 0.2s; }
   nav.bottom button.active { color: var(--brand-primary); }
   nav.bottom button.active svg { transform: translateY(-2px); }
@@ -214,6 +301,41 @@
   <div class="class-grid" id="classGrid"></div>
 </section>
 
+<!-- VIEW BARU: CREATOR -->
+<section class="view" id="view-creator">
+  <div class="section-header"><h2>Tentang Pembuat</h2></div>
+  
+  <div class="creator-card">
+    <div class="creator-avatar-wrap">
+      <!-- Script akan otomatis ngecek file profile.jpg/png -->
+      <img src="profile.jpg" alt="Foto Profil" class="creator-avatar" id="creatorPhoto" style="display:none;" onerror="this.style.display='none'; document.getElementById('creatorInitial').style.display='flex';">
+      <div class="creator-initial" id="creatorInitial">HL</div>
+      
+      <div class="creator-badge">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+    </div>
+    
+    <h2 class="creator-name">Hizkia Letwar</h2>
+    <div class="creator-role">Frontend Developer</div>
+    
+    <div class="creator-info-list">
+      <div class="creator-info-item">
+        <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+        <span>Kelas XI TJKT 1</span>
+      </div>
+      <div class="creator-info-item">
+        <svg viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M9 8h1"></path><path d="M9 12h1"></path><path d="M9 16h1"></path><path d="M14 8h1"></path><path d="M14 12h1"></path><path d="M14 16h1"></path><path d="M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16"></path></svg>
+        <span>SMK Negeri 1 Maluku Tengah</span>
+      </div>
+    </div>
+  </div>
+  
+  <p style="text-align:center; font-size:12px; color:var(--text-secondary); margin-top:20px;">
+    Dibuat dengan <svg style="width:12px;height:12px;display:inline;stroke:#ef4444;fill:#ef4444;" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg> untuk SMKN 1 Maluku Tengah.
+  </p>
+</section>
+
 <nav class="bottom">
   <button data-view="home" class="active">
     <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
@@ -230,6 +352,10 @@
   <button data-view="search">
     <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
     <span>Cari</span>
+  </button>
+  <button data-view="creator">
+    <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+    <span>Creator</span>
   </button>
 </nav>
 
@@ -251,10 +377,10 @@
 /* =========================================
    VARIABEL GLOBAL & STATE
    ========================================= */
-let KELAS = []; // Akan diisi otomatis via scraping
+let KELAS = []; 
 const HARI = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
 let savedKelas = null;
-try { savedKelas = JSON.parse(localStorage.getItem("tracker.kelas.v5")); } catch(e){}
+try { savedKelas = JSON.parse(localStorage.getItem("tracker.kelas.v6")); } catch(e){}
 
 const $ = s => document.querySelector(s);
 const $homeContent = $("#homeContent");
@@ -271,7 +397,7 @@ const $updateAlert = $("#updateAlert");
 
 function todayName(){ return HARI[new Date().getDay()]; }
 function isWeekend(){ return new Date().getDay() === 0 || new Date().getDay() === 6; }
-function saveClass(id, nama) { savedKelas = { id, nama, lastChecked: new Date().toISOString() }; localStorage.setItem("tracker.kelas.v5", JSON.stringify(savedKelas)); }
+function saveClass(id, nama) { savedKelas = { id, nama, lastChecked: new Date().toISOString() }; localStorage.setItem("tracker.kelas.v6", JSON.stringify(savedKelas)); }
 
 /* =========================================
    FUNGSI SCRAPE DATA GURU (OTOMATIS)
@@ -282,7 +408,6 @@ async function syncDataFromGithub() {
     const response = await fetch(urlGuru);
     const htmlText = await response.text();
 
-    // Ekstrak array KELAS dan GURU pakai Regex
     const matchKelas = htmlText.match(/const KELAS\s*=\s*(\[[\s\S]*?\]);/);
     const matchGuru = htmlText.match(/const GURU\s*=\s*(\[[\s\S]*?\]);/);
 
@@ -293,13 +418,11 @@ async function syncDataFromGithub() {
       renderSearch();
       renderGuru();
       
-      // Tampilkan notif sukses
       $updateAlert.classList.add("show");
       setTimeout(() => $updateAlert.classList.remove("show"), 4000);
     }
   } catch (error) {
     console.error("Gagal sinkronisasi, pakai data cadangan.", error);
-    // Fallback kalau gagal (misal offline)
     KELAS = [
       {no:13, tingkat:"XI", nama:"XI TJKT 1", id:"1VEpap9LQfYKn3zHUjR43xyQ6CoeVIIp3"},
       {no:14, tingkat:"XI", nama:"XI TJKT 2", id:"1ZOcxvMS9cU1RQGuEqSdVUB8g_GsajbX_"}
@@ -375,7 +498,7 @@ function renderHome() {
 
   $("#btnChangeClass").addEventListener("click", () => {
     savedKelas = null;
-    localStorage.removeItem("tracker.kelas.v5");
+    localStorage.removeItem("tracker.kelas.v6");
     renderHome();
     renderToday();
     switchView("search");
@@ -517,11 +640,38 @@ $overlay.addEventListener("click", (e) => { if (e.target === $overlay) closePrev
 document.addEventListener("keydown", (e) => { if (e.key === "Escape") closePreview(); });
 
 /* =========================================
+   LOGIKA FOTO PROFIL CREATOR
+   ========================================= */
+function loadCreatorPhoto() {
+  const img = document.getElementById('creatorPhoto');
+  // Coba load profile.jpg dulu, kalau gagal coba profile.png
+  img.src = "profile.jpg";
+  
+  // Kalau profile.jpg nggak ada, ganti ke profile.png
+  img.onerror = function() {
+    if (this.src.includes("profile.jpg")) {
+      this.src = "profile.png";
+    } else {
+      // Kalau dua-duanya nggak ada, biarin inisial yang muncul
+      this.style.display = 'none';
+      document.getElementById('creatorInitial').style.display = 'flex';
+    }
+  };
+  
+  // Kalau berhasil load
+  img.onload = function() {
+    this.style.display = 'block';
+    document.getElementById('creatorInitial').style.display = 'none';
+  };
+}
+
+/* =========================================
    INIT APP
    ========================================= */
 renderHome();
 renderToday();
-syncDataFromGithub(); // Tarik data dari GitHub guru
+syncDataFromGithub();
+loadCreatorPhoto(); // Panggil fungsi load foto
 switchView("home");
 </script>
 </body>
